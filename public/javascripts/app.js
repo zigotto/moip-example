@@ -25,11 +25,13 @@ $(function() {
   };
 
   moipSuccess = function(data){
-    log(data);
+    var div = '<p>Sua transação foi processada pelo Moip Pagamentos S/A. <br /> A sua transação está "'+ data.Status +'" e o código Moip é "'+ data.CodigoMoIP +'". <br /> Caso tenha alguma dúvida referente a transação, entre em contato com o Moip.';
+    $('#response').html(div);
   };
 
   moipError = function(data) {
-    log(data);
+    var div = 'Algo de errado aconteceu: '+ data.Mensagem +'';
+    $('#response').html(div);
   };
 
   $('a.confirm').live('click', function() {
