@@ -1,0 +1,12 @@
+<script type='text/javascript' src='https://desenvolvedor.moip.com.br/sandbox/transparente/MoipWidget-v2.js' charset='ISO-8859-1'></script>
+<script type='text/javascript' src='/javascripts/jquery.js'></script>
+<script type='text/javascript' src='/javascripts/app.js'></script>
+
+#MoipWidget{:"data-token" => @token["Token"], :"callback-method-success" => "moipSuccess", :"callback-method-error" => "moipError"}
+
+= @token.inspect
+
+%p
+  %a.confirm{:href => "#"} Confirmar
+
+#response
