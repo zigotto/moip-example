@@ -24,20 +24,31 @@ $(function() {
     MoipWidget(settings);
   };
 
-  moipSuccess = function(data){
+  moipSuccess = function(data) {
     var div = '<p>Sua transação foi processada pelo Moip Pagamentos S/A. <br /> A sua transação está "'+ data.Status +'" e o código Moip é "'+ data.CodigoMoIP +'". <br /> Caso tenha alguma dúvida referente a transação, entre em contato com o Moip.';
-    $('#response').html(div);
+    $('#moip_response').html(div);
   };
 
   moipError = function(data) {
     var div = 'Algo de errado aconteceu: '+ data.Mensagem +'';
-    $('#response').html(div);
+    $('#moip_response').html(div);
   };
 
-  $('a.confirm').live('click', function() {
+  $('a.confirm').live('click', function(event) {
+    event.preventDefault();
     processCC();
   });
 
-  $('#userInformation').validate();
+  $('#userInformation').validate({
+    submitHandler: function(form) {
+      var data = $(':input', form).serialize();
+      $(':submit', form).val('Aguarde...');
+
+      $.post(form.action, data, function(response) {
+        $('#check').html(response);
+        $(form).hide();
+      });
+    }
+  });
 
 });
